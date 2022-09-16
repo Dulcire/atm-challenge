@@ -16,7 +16,7 @@ Application to simulate an ATM using Springboot
   * You have to create a shchema named: ***atm-challenge***
      
 
-***You can change DB this properties in properties.yml***
+***You can change DB properties in application.yml***
 ### Build & Usage ###
 
 * Clone atm-challenge to in/your/path: 
