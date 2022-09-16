@@ -23,8 +23,8 @@ Application to simulate an ATM using Springboot
 *     git clone https://github.com/Dulcire/atm-challenge.git
 * Go to your atm-challenge: 
 *     cd atm-challenge
-* execute: 
-*     mvn clean install
+* execute: (Note: you would need the database created)
+*     mvn clean install  
 * execute:
 *     java -jar ./target/atm-challenge-1.0.jar
 

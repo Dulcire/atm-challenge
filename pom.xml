@@ -77,7 +77,6 @@
             <version>2.9.2</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -127,6 +126,39 @@
                             <mainClass>com.challenge.zinkworks.AtmChallengeApplication</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                    <instrumentation>
+                        <excludes>
+                            <ignore>com/challenge/zinkworks/config/*</ignore>
+                        </excludes>
+                        <excludes>
+                            <exclude>com/challenge/zinkworks/exceptions/*</exclude>
+                        </excludes>
+                        <excludes>
+                            <exclude>com/challenge/zinkworks/models/*</exclude>
+                        </excludes>
+                        <excludes>
+                            <exclude>com/challenge/zinkworks/repositories/*</exclude>
+                        </excludes>
+                    </instrumentation>
                 </configuration>
             </plugin>
         </plugins>

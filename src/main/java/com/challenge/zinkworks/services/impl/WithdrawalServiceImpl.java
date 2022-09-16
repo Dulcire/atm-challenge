@@ -7,6 +7,7 @@ import com.challenge.zinkworks.models.dtos.DispenseDto;
 import com.challenge.zinkworks.models.dtos.response.WithdrawalResponseDto;
 import com.challenge.zinkworks.models.enums.ExceptionMessage;
 import com.challenge.zinkworks.services.WithdrawalService;
+import com.challenge.zinkworks.utils.UtilsATM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +40,8 @@ public class WithdrawalServiceImpl implements WithdrawalService {
         final AccountDto account = accountService.getAccount(pin);
         final List<BillDto> atmBills = billService.findAll();
         final Long newbalance = account.getBalance() + account.getOverdraft();
-        if (amount.compareTo(newbalance) <= 0) {
-            if (amount.compareTo(account.getMaximun()) <= 0) {
+        if (UtilsATM.biggerThan(amount, newbalance)) {
+            if (UtilsATM.validateMaximun(amount, account.getMaximun())) {
 
                 final List<BillDto> withdrawalBills = withdrawalBills(amount, atmBills);
 
@@ -92,9 +93,9 @@ public class WithdrawalServiceImpl implements WithdrawalService {
         final BillDto dispense;
         Long newamount = amount;
         Long billQuantity = 0L;
-        if (amount.compareTo(bill.getBill()) >= 0) {
+        if (UtilsATM.lowerThan(amount, bill.getBill())) {
             billQuantity = amount / bill.getBill();
-            if (billQuantity.compareTo(bill.getQuantity()) <= 0) {
+            if (UtilsATM.lowerThan(bill.getQuantity(), billQuantity)) {
                 newamount = amount % bill.getBill();
             } else {
                 newamount = amount - (bill.getBill() * bill.getQuantity());
@@ -113,9 +114,9 @@ public class WithdrawalServiceImpl implements WithdrawalService {
      * @return
      */
     public List<BillDto> validationWithdraw(final Long amount, final List<BillDto> withdrawal) {
-        if (amount.compareTo(0L) == 0) {
+        if (UtilsATM.isZero(amount)) {
             return withdrawal.stream()
-                    .filter(billDto -> !billDto.getQuantity().equals(0L))
+                    .filter(billDto -> !UtilsATM.equalsToZero(billDto))
                     .collect(Collectors.toList());
         } else {
             throw new ATMException(ExceptionMessage.INCORRECT_AMOUNT.getMessage(),
@@ -133,9 +134,9 @@ public class WithdrawalServiceImpl implements WithdrawalService {
         withdrawal.stream().forEach(billDto -> {
             atmBills.stream()
                     .filter(billATM ->
-                            billATM.getBill().equals(billDto.getBill()))
+                            UtilsATM.equalsBillTo(billATM, billDto))
                     .forEach(billATM -> {
-                        billATM.setQuantity(billATM.getQuantity() - billDto.getQuantity());
+                        billATM.setQuantity(UtilsATM.quantityResult(billATM, billDto));
                         billService.save(billATM);
                     });
         });
