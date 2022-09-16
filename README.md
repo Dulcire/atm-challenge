@@ -20,7 +20,7 @@ Application to simulate an ATM using Springboot
 ### Build & Usage ###
 
 * Clone atm-challenge to in/your/path: 
-*     git clone 
+*     git clone https://github.com/Dulcire/atm-challenge.git
 * Go to your atm-challenge: 
 *     cd atm-challenge
 * execute: 
