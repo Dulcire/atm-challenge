@@ -1,4 +1,4 @@
-# Java Challenge
+# ATM Challenge
 
 # Description
 Application to simulate an ATM using Springboot
