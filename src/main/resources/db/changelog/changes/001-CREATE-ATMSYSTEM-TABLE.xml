@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="dchipre" id="001-ATMSYSTEM-TABLE-000" dbms="mysql">
+        <tagDatabase tag="0.0.0"/>
+    </changeSet>
+    <changeSet id="5092022-001-ATMSYSTEM-TABLE-002" author="dchipre">
+        <createTable tableName="account">
+            <column name="account_id" type="int">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="account_id_pk"/>
+            </column>
+            <column name="account_number" type="varchar(250)"/>
+            <column name="pin" type="varchar(250)"/>
+            <column name="maximun" type="bigint"/>
+            <column name="balance" type="bigint"/>
+            <column name="overdraft" type="bigint"/>
+        </createTable>
+        <createTable tableName="bill">
+            <column name="bill_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="atm_id_pk"/>
+            </column>
+            <column name="bill" type="bigint"/>
+            <column name="quantity" type="bigint"/>
+        </createTable>
+        <addAutoIncrement tableName="account" columnName="account_id" columnDataType="bigint" startWith="1"
+                          incrementBy="1"/>
+        <addAutoIncrement tableName="bill" columnName="bill_id" columnDataType="bigint" startWith="1" incrementBy="1"/>
+        <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1"/>
+    </changeSet>
+</databaseChangeLog>

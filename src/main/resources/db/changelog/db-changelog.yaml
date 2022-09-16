@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/changes/001-CREATE-ATMSYSTEM-TABLE.xml
+  - include:
+      file: classpath:db/changelog/changes/002-INSERT-ATM-DATA.xml
+  - include:
+      file: classpath:db/changelog/changes/003-INSERT-ACCOUNT-DATA.xml

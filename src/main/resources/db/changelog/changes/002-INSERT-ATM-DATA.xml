@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="dchipre" id="002-INSERT-ATM-DATA-000" dbms="mysql">
+        <tagDatabase tag="0.0.0"/>
+    </changeSet>
+    <!-- INSERT LANGUAGES -->
+    <changeSet author="dchipre" id="002-INSERT-ATM-DATA-001">
+        <insert tableName="bill">
+            <column name="bill_id" value="1"/>
+            <column name="bill" value="50"/>
+            <column name="quantity" value="10"/>
+        </insert>
+        <insert tableName="bill">
+            <column name="bill_id" value="2"/>
+            <column name="bill" value="20"/>
+            <column name="quantity" value="30"/>
+        </insert>
+        <insert tableName="bill">
+            <column name="bill_id" value="3"/>
+            <column name="bill" value="10"/>
+            <column name="quantity" value="30"/>
+        </insert>
+        <insert tableName="bill">
+            <column name="bill_id" value="4"/>
+            <column name="bill" value="5"/>
+            <column name="quantity" value="20"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
